@@ -22,4 +22,7 @@ public interface MovieService {
     public MovieDetailsDto getMovieDetails(String movieTitle) ;
 
 
+    void deleteMovieByTitle(String title);
+
+    Movie updateMovieByTitle(String title, String newTitle, String newDescription, String newRating);
 }

@@ -42,4 +42,14 @@ public class MovieServiceImpl implements MovieService{
     public MovieDetailsDto getMovieDetails(String movieTitle) {
         return repository.getMovieDetails(movieTitle);
     }
+
+    @Override
+    public void deleteMovieByTitle(String title) {
+        repository.deleteMovieByTitle(title);
+    }
+    @Override
+    public Movie updateMovieByTitle(String movieTitle, String newTitle, String newDescription, String newRating) {
+        return repository.updateMovieByTitle(movieTitle, newTitle, newDescription, newRating);
+    }
+
 }

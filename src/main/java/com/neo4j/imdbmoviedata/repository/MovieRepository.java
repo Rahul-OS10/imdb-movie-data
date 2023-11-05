@@ -88,4 +88,12 @@ public interface MovieRepository extends Neo4jRepository<Movie, String> {
             "OPTIONAL MATCH (movie)-[:IN]->(genres:Genres) " +
             "RETURN movie, COLLECT(DISTINCT actors.name) AS actors, COLLECT(DISTINCT directors.name) AS directors, COLLECT(DISTINCT genres.type) AS genres")
     MovieDetailsDto getMovieDetails(String movieTitle);
+
+    @Query("MATCH (movie:Movie {title: $movieTitle}) DETACH DELETE movie")
+    void deleteMovieByTitle(String movieTitle);
+
+    @Query("MATCH (movie:Movie {title: $movieTitle}) SET movie.title = $newTitle, movie.description = $newDescription, movie.rating = $newRating RETURN movie")
+    Movie updateMovieByTitle( String movieTitle, String newTitle, String newDescription, String newRating);
+
+
 }

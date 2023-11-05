@@ -68,7 +68,7 @@ public class MovieController {
         return new ResponseEntity<>("Movie created successfully" , HttpStatus.CREATED);
     }
 
-    @GetMapping("/movieDetails")
+    @RequestMapping(value = "/movieDetails" , method = RequestMethod.GET)
     public ResponseEntity<MovieDetailsDto> getMovieDetails(@RequestParam String movieTitle) {
         MovieDetailsDto movieDetails = service.getMovieDetails(movieTitle);
 
@@ -76,6 +76,32 @@ public class MovieController {
             return ResponseEntity.ok(movieDetails);
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @RequestMapping(value = "/deleteMovie", method = RequestMethod.DELETE)
+    public ResponseEntity<String> deleteMovie(@RequestParam String title) {
+        if(service.getMovieDetails(title) == null) {
+            return new ResponseEntity<>("The provided movie is not present in the database",HttpStatus.NO_CONTENT);
+        }
+        else{
+            service.deleteMovieByTitle(title);
+            return new ResponseEntity<>("Movie deleted successfully!!!", HttpStatus.OK);
+        }
+    }
+
+    @RequestMapping(value = "/updateMovie", method = RequestMethod.PATCH)
+    public ResponseEntity<Movie> updateMovie(@RequestParam String title, @RequestParam String newTitle,
+                                             @RequestParam String newDescription, @RequestParam String newRating )
+    {
+        if(service.getMovieDetails(title) != null)
+        {
+            Movie updatedMovie = service.updateMovieByTitle(title, newTitle, newDescription, newRating);
+            return new ResponseEntity<>(updatedMovie, HttpStatus.OK);
+        }
+        else {
+            System.out.println("!!!! CAN'T UPDATE THE MOVIE, BECAUSE IT IS NOT PRESENT IN DB !!!!");
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
