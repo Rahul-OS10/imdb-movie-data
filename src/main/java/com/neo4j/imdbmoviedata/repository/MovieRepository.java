@@ -1,6 +1,7 @@
 package com.neo4j.imdbmoviedata.repository;
 
 import com.neo4j.imdbmoviedata.entity.Movie;
+import com.neo4j.imdbmoviedata.entity.MovieDetailsDto;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
@@ -48,4 +49,43 @@ public interface MovieRepository extends Neo4jRepository<Movie, String> {
             "MERGE (d:Person {name: director})\n" +
             "CREATE (d)-[:DIRECTED]->(movie)")
     void createDirectorRelationship(List<String> directors, String movieTitle);
+
+    //get movie details by title.
+//    @Query("MATCH (movie:Movie {title: $movieTitle}) " +
+//            "OPTIONAL MATCH (movie)-[:ACTED_IN]-(actor:Person) " +
+//            "OPTIONAL MATCH (movie)-[:DIRECTED]-(director:Person) " +
+//            "OPTIONAL MATCH (movie)-[:IN]-(genre:Genres) " +
+//            "RETURN movie, COLLECT(DISTINCT actor) AS actors, COLLECT(DISTINCT director) AS directors, COLLECT(DISTINCT genre) AS genres")
+//    @Query("MATCH (movie:Movie {title: $movieTitle}) " +
+//            "OPTIONAL MATCH (movie)<-[:ACTED_IN]-(actors:Person) " +
+//            "OPTIONAL MATCH (movie)<-[:DIRECTED]-(directors:Person) " +
+//            "OPTIONAL MATCH (movie)-[:IN]->(genres:Genres) " +
+//            "RETURN movie, collect(actors.name) AS actors, collect(directors.name) AS directors, collect(genres.type) AS genres")
+//   the above query is returning duplicate actors,directors. so used below query and it worked .but not giving genres
+//    @Query("MATCH (movie:Movie {title: $movieTitle}) " +
+//            "OPTIONAL MATCH (movie)<-[:ACTED_IN]-(actors:Person) " +
+//            "WITH DISTINCT movie, COLLECT(DISTINCT actors.name) AS actors " +
+//            "OPTIONAL MATCH (movie)<-[:DIRECTED]-(directors:Person) " +
+//            "WITH DISTINCT movie, actors, COLLECT(DISTINCT directors.name) AS directors " +
+//            "OPTIONAL MATCH (movie)-[:IN]->(genres:Genres) " +
+//            "RETURN DISTINCT movie, actors, directors, COLLECT(DISTINCT genres.type) AS genres")
+//    @Query("MATCH (movie:Movie {title: $movieTitle}) " +
+//            "OPTIONAL MATCH (movie)<-[:ACTED_IN]-(actors:Person) " +
+//            "WITH movie, COLLECT(DISTINCT actors.name) AS actors " +
+//            "OPTIONAL MATCH (movie)<-[:DIRECTED]-(directors:Person) " +
+//            "WITH movie, actors, COLLECT(DISTINCT directors.name) AS directors " +
+//            "OPTIONAL MATCH (movie)-[:IN]->(genres:Genres) " +
+//            "WITH movie, actors, directors, COLLECT(DISTINCT genres.type) AS genres " +
+//            "RETURN movie, actors, directors, genres")
+//    @Query("MATCH (movie:Movie {title: $movieTitle})\n" +
+//            "OPTIONAL MATCH (movie)<-[:ACTED_IN]-(actors:Person)\n" +
+//            "OPTIONAL MATCH (movie)<-[:DIRECTED]-(directors:Person)\n" +
+//            "OPTIONAL MATCH (movie)-[:IN]->(genres:Genres)\n" +
+//            "RETURN DISTINCT movie, COLLECT(DISTINCT actors.name) AS actors, COLLECT(DISTINCT directors.name) AS directors, COLLECT(DISTINCT genres.type) AS genres")
+    @Query("MATCH (movie:Movie {title: $movieTitle}) " +
+            "OPTIONAL MATCH (movie)<-[:ACTED_IN]-(actors:Person) " +
+            "OPTIONAL MATCH (movie)<-[:DIRECTED]-(directors:Person) " +
+            "OPTIONAL MATCH (movie)-[:IN]->(genres:Genres) " +
+            "RETURN movie, COLLECT(DISTINCT actors.name) AS actors, COLLECT(DISTINCT directors.name) AS directors, COLLECT(DISTINCT genres.type) AS genres")
+    MovieDetailsDto getMovieDetails(String movieTitle);
 }

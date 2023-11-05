@@ -26,7 +26,7 @@ public class Movie {
     public String votes;
     public String revenue;
     @Relationship(type = "IN" , direction = Relationship.Direction.OUTGOING)
-    //@JsonIgnore
+    @JsonIgnore
     // Since we dont want genres property in the Movie node, i am ignoring the json field in the result.
     public List<Genres> genres;
 

@@ -1,6 +1,7 @@
 package com.neo4j.imdbmoviedata.service;
 
 import com.neo4j.imdbmoviedata.entity.Movie;
+import com.neo4j.imdbmoviedata.entity.MovieDetailsDto;
 import com.neo4j.imdbmoviedata.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,7 @@ public class MovieServiceImpl implements MovieService{
         repository.createDirectorRelationship(director,title);
     }
 
-
+    public MovieDetailsDto getMovieDetails(String movieTitle) {
+        return repository.getMovieDetails(movieTitle);
+    }
 }

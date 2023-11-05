@@ -1,6 +1,7 @@
 package com.neo4j.imdbmoviedata.controller;
 
 import com.neo4j.imdbmoviedata.entity.Movie;
+import com.neo4j.imdbmoviedata.entity.MovieDetailsDto;
 import com.neo4j.imdbmoviedata.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -65,6 +66,17 @@ public class MovieController {
             service.createDirectorRelationship(directors , movie.title);
         }
         return new ResponseEntity<>("Movie created successfully" , HttpStatus.CREATED);
+    }
+
+    @GetMapping("/movieDetails")
+    public ResponseEntity<MovieDetailsDto> getMovieDetails(@RequestParam String movieTitle) {
+        MovieDetailsDto movieDetails = service.getMovieDetails(movieTitle);
+
+        if (movieDetails != null) {
+            return ResponseEntity.ok(movieDetails);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }
