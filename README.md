@@ -20,7 +20,12 @@ REQUIREMENTS FOR PROJECT SETUP
 ------------------------------
 1) JDK 17 with java installed on the pc
 2) Postman tool to test the API's
+3) Code editot like intellij(i used intellij)
 
 I have also pushed the code to my git-hub repository and i am providing the link for that repo below, you can clone the project from there.
 
 https://github.com/Rahul-os/imdb-movie-data    <-- MY GITHUB LINK TO CLONE THE PROJECT -->
+
+----------------------------------------------------------------------
+I have also added Swagger-ui, and it can be accessed at
+http://localhost:8081/swagger-ui/index.html#/
