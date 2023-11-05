@@ -1,0 +1,8 @@
+spring:
+  neo4j:
+    uri: neo4j+s://9efe98a7.databases.neo4j.io
+    authentication:
+      username: neo4j
+      password: 9lZh8hvrG4sdOdas9Sx_vnf6Alc6v0FMtx-dJaT4awo
+server:
+  port: 8081
