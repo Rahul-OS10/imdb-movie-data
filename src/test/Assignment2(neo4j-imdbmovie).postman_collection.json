@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "e12db7ce-1598-4cf2-8327-f1f6d74514e6",
+		"name": "Assignment2(neo4j-imdbmovie)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29077799"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8081/imdb/getAllMovies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/imdb/getAllMovies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"imdb",
+						"getAllMovies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMovieDetailsByTitle",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/imdb/Vikram",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"imdb",
+						"Vikram"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMovieByTitle",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/imdb/Vikram",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"imdb",
+						"Vikram"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createMovie",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ids\":\"1039\",\r\n  \"title\": \"Vikram\",\r\n  \"description\": \"This is a sample movie description.\",\r\n  \"year\": \"2022\",\r\n  \"runtime\": \"160\",\r\n  \"rating\": \"8.5\",\r\n  \"votes\": \"12345\",\r\n  \"revenue\": \"5000\",\r\n  \"genres\": [\"thriller\",\"Crime\",\"action\"],\r\n  \"actors\": [\"Vijay\",\"surya\"],\r\n  \"directors\": [\"Sam\"]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/imdb",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"imdb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateMovie",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/imdb?title=Vikram&newTitle=Vikramhitman&newDescription=This movie is about drugs chasing&newRating=8.1",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"imdb"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Vikram"
+						},
+						{
+							"key": "newTitle",
+							"value": "Vikramhitman"
+						},
+						{
+							"key": "newDescription",
+							"value": "This movie is about drugs chasing"
+						},
+						{
+							"key": "newRating",
+							"value": "8.1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
