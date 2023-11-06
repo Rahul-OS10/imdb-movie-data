@@ -11,11 +11,16 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class MovieDetailsDto {
     private Movie movie;
     private List<String> actors;
     private List<String> directors;
-    @JsonIgnore
-    private List<String> genres;
+    private List<String> genre;
+
+    public MovieDetailsDto(Movie movie, List<String> actors, List<String> directors, List<String> genre) {
+        this.movie = movie;
+        this.actors = actors;
+        this.directors = directors;
+        this.genre = genre;
+    }
 }
