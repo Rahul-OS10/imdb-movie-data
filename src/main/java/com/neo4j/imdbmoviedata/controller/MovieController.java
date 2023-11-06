@@ -12,13 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/imdb")
 public class MovieController {
 
     @Autowired
     MovieService service;
 
-    @RequestMapping(value = "/getAllMovies" , method = RequestMethod.GET )
+    @GetMapping("/imdb")
     public ResponseEntity<List<Movie>> retrieveAllMovies() {
         List<Movie> allMovies = service.getAllMovies();
         if(!allMovies.isEmpty())
@@ -27,7 +26,7 @@ public class MovieController {
             return new ResponseEntity<>(allMovies,HttpStatus.NO_CONTENT);
     }
 
-    @RequestMapping(value = "/createNewMovie" , method = RequestMethod.POST)
+    @PostMapping("/imdb")
     public ResponseEntity<String> createMovie(@RequestBody Map<String , Object> requestBody)
     {
         Movie movie = new Movie();
@@ -68,8 +67,8 @@ public class MovieController {
         return new ResponseEntity<>("Movie created successfully" , HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/movieDetails" , method = RequestMethod.GET)
-    public ResponseEntity<MovieDetailsDto> getMovieDetails(@RequestParam String movieTitle) {
+    @GetMapping("/imdb/{movieTitle}")
+    public ResponseEntity<MovieDetailsDto> getMovieDetails(@PathVariable String movieTitle) {
         MovieDetailsDto movieDetails = service.getMovieDetails(movieTitle);
 
         if (movieDetails != null) {
@@ -79,8 +78,8 @@ public class MovieController {
         }
     }
 
-    @RequestMapping(value = "/deleteMovie", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteMovie(@RequestParam String title) {
+    @DeleteMapping("/imdb/{title}")
+    public ResponseEntity<String> deleteMovie(@PathVariable String title) {
         if(service.getMovieDetails(title) == null) {
             return new ResponseEntity<>("The provided movie is not present in the database",HttpStatus.NO_CONTENT);
         }
@@ -90,7 +89,7 @@ public class MovieController {
         }
     }
 
-    @RequestMapping(value = "/updateMovie", method = RequestMethod.PATCH)
+    @PatchMapping("/imdb")
     public ResponseEntity<Movie> updateMovie(@RequestParam String title, @RequestParam String newTitle,
                                              @RequestParam String newDescription, @RequestParam String newRating )
     {

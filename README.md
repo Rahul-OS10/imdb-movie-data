@@ -18,9 +18,14 @@ test all the endpoints that I have created .
 
 REQUIREMENTS FOR PROJECT SETUP
 ------------------------------
-1) JDK 17 with java installed on the pc
-2) Postman tool to test the API's
-3) Code editot like intellij(i used intellij)
+1) JDK 17 with java installed on the pc 
+    -> This is the link to install java 17 on pc https://www.oracle.com/java/technologies/downloads/
+    -> Download the zip file from my git repo from here https://github.com/Rahul-os/imdb-movie-data, and then unzip the folder.
+2) Then open any code editor like intellij and them import the project. 
+3) After importing the project go to the main class i.e, ImdbMovieDataApplication , present at C:\Users\malla\OneDrive\Desktop\MS-sem1\MS ADB\imdb-movie-data\src\main\java\com\neo4j\imdbmoviedata
+    and run it. This will start the application on Tomcat Server and the port is 8081 .
+4) To test the application endpoints use Postman tool .(I have attached the postman collection in \test folder)
+
 
 I have also pushed the code to my git-hub repository and i am providing the link for that repo below, you can clone the project from there.
 
